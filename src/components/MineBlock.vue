@@ -2,6 +2,7 @@
 import { useVModels } from '@vueuse/core'
 import { watch } from 'vue'
 
+const bombImg = ref(null)
 const blockStyle = [
   'b-1',
   'b-solid',
@@ -128,6 +129,16 @@ watch(
     if (block.value.isMine) {
       if (block.value.isEnd) return
 
+      bombImg.value.animate(
+        [
+          { opacity: 1, transform: 'scale(1, 1)' },
+          { opacity: 0, transform: 'scale(50, 50)' }
+        ],
+        {
+          duration: 500,
+          easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+        }
+      )
       emit('stepOnBomb')
       return
     }
@@ -153,11 +164,12 @@ watch(
   >
     {{ label }}
     <div
-      v-if="block.isTurned && block.isMine"
+      v-show="block.isTurned && block.isMine"
       class="i-material-symbols-bomb"
+      ref="bombImg"
     ></div>
     <div
-      v-if="block.isFlag && !block.isTurned"
+      v-show="block.isFlag && !block.isTurned"
       class="i-material-symbols-flag-outline"
     ></div>
   </div>
