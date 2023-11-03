@@ -85,39 +85,33 @@ function generateMinesAround(row, col) {
     { x: 0, y: 1 },
     { x: 1, y: 1 }
   ]
+
   let count = 0
+  let shouldTurn = []
+
+  const height = props.options.HEIGHT
+  const width = props.options.WIDTH
+
   offset.forEach(i => {
     const neighborX = x + i.x
     const neighborY = y + i.y
 
     if (
-      !(
-        neighborX >= 0 &&
-        neighborX < props.options.HEIGHT &&
-        neighborY >= 0 &&
-        neighborY < props.options.WIDTH
-      )
-    )
-      return
-
-    state.value[neighborX][neighborY].value.isMine && count++
+      (neighborX >= 0) &
+      (neighborX < height) &
+      (neighborY >= 0) &
+      (neighborY < width)
+    ) {
+      state.value[neighborX][neighborY].value.isMine
+        ? count++
+        : shouldTurn.push({ x: neighborX, y: neighborY })
+    }
   })
-  if (count === 0) {
-    offset.forEach(i => {
-      const neighborX = x + i.x
-      const neighborY = y + i.y
-      if (
-        !(
-          neighborX >= 0 &&
-          neighborX < props.options.HEIGHT &&
-          neighborY >= 0 &&
-          neighborY < props.options.WIDTH
-        )
-      )
-        return
-      state.value[neighborX][neighborY].value.isTurned = true
-    })
-  }
+
+  if (count !== 0) return count
+  shouldTurn.forEach(pos => {
+    state.value[pos.x][pos.y].value.isTurned = true
+  })
 
   return count
 }
