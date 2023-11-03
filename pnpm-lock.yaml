@@ -9,7 +9,7 @@ dependencies:
     specifier: ^10.5.0
     version: 10.5.0(vue@3.3.7)
   vue:
-    specifier: ^3.3.4
+    specifier: ^3.3.7
     version: 3.3.7
 
 devDependencies:

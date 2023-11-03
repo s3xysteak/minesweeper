@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.5.0",
-    "vue": "^3.3.4"
+    "vue": "^3.3.7"
   },
   "devDependencies": {
     "@iconify-json/material-symbols": "^1.1.61",
