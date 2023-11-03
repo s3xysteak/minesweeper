@@ -1,5 +1,9 @@
 English | [中文](doc/readme-zh_cn.md)
 
+## Preview online
+
+You can [click here](https://s3xysteak.github.io/minesweeper/) to preview this project!
+
 ## Install & Run
 
 ```sh

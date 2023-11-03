@@ -1,5 +1,9 @@
 [English](../README.md) | 中文
 
+## 在线预览
+
+你可以  [点这里](https://s3xysteak.github.io/minesweeper/) 以直接预览此项目！
+
 ## 安装 && 运行
 
 ```sh
