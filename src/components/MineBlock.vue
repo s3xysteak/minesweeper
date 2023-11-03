@@ -21,12 +21,8 @@ const props = defineProps({
     type: Object,
     required: true
   },
-  WIDTH: {
-    type: Number,
-    required: true
-  },
-  HEIGHT: {
-    type: Number,
+  options: {
+    type: Object,
     required: true
   },
   state: {
@@ -62,12 +58,19 @@ function onRightClick() {
   }
 }
 
-function onClick(_, isEnd = false) {
-  if (block.value.isTurned) return
-  if (block.value.isFlag && !isEnd) return
-  block.value.isTurned = true
+async function onClick(_, isEnd = false) {
+  setTimeout(() => {
+    if (block.value.isTurned) return
+    if (block.value.isFlag && !isEnd) return
+    block.value.isTurned = true
+  }, 0)
 }
 
+/**
+ * @param {string || number} row - 行数
+ * @param {string || number} col - 列数
+ * @returns {number} - 周围8格的炸弹数量
+ */
 function generateMinesAround(row, col) {
   const x = parseInt(row)
   const y = parseInt(col)
@@ -90,30 +93,31 @@ function generateMinesAround(row, col) {
     if (
       !(
         neighborX >= 0 &&
-        neighborX < props.WIDTH &&
+        neighborX < props.options.HEIGHT &&
         neighborY >= 0 &&
-        neighborY < props.HEIGHT
+        neighborY < props.options.WIDTH
       )
     )
       return
 
     state.value[neighborX][neighborY].value.isMine && count++
   })
-  count === 0 &&
+  if (count === 0) {
     offset.forEach(i => {
       const neighborX = x + i.x
       const neighborY = y + i.y
       if (
         !(
           neighborX >= 0 &&
-          neighborX < props.WIDTH &&
+          neighborX < props.options.HEIGHT &&
           neighborY >= 0 &&
-          neighborY < props.HEIGHT
+          neighborY < props.options.WIDTH
         )
       )
         return
       state.value[neighborX][neighborY].value.isTurned = true
     })
+  }
 
   return count
 }
@@ -159,6 +163,7 @@ watch(
         ? 'bg-gray-1'
         : 'bg-gray-3 hover:bg-gray-2 cursor-pointer active:bg-gray-4'
     ]"
+    transition-100
     @click="onClick"
     @contextmenu.prevent="onRightClick"
   >
