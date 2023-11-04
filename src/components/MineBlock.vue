@@ -2,6 +2,21 @@
 import { useVModels } from '@vueuse/core'
 import { watch } from 'vue'
 
+const isTouchstart = ref(false)
+function onTouchstart() {
+  isTouchstart.value = true
+  setTimeout(() => {
+    isTouchstart.value = false
+  }, 300)
+}
+function onTouchend() {
+  isTouchstart.value ? onClick() : onRightClick()
+}
+function onPcClick() {
+  if (/Mobile/i.test(navigator.userAgent)) return
+  onClick()
+}
+
 const bombImg = ref(null)
 const blockStyle = [
   'b-1',
@@ -58,12 +73,10 @@ function onRightClick() {
   }
 }
 
-async function onClick(_, isEnd = false) {
-  setTimeout(() => {
-    if (block.value.isTurned) return
-    if (block.value.isFlag && !isEnd) return
-    block.value.isTurned = true
-  }, 0)
+async function onClick(isEnd = false) {
+  if (block.value.isTurned) return
+  if (block.value.isFlag && !isEnd) return
+  block.value.isTurned = true
 }
 
 /**
@@ -117,7 +130,7 @@ function generateMinesAround(row, col) {
 }
 
 watchEffect(() => {
-  block.value.isEnd && onClick('', true)
+  block.value.isEnd && onClick(true)
 })
 watch(
   () => block.value.isTurned,
@@ -158,7 +171,9 @@ watch(
         : 'bg-gray-3 hover:bg-gray-2 cursor-pointer active:bg-gray-4'
     ]"
     transition-100
-    @click="onClick"
+    @touchstart="onTouchstart"
+    @touchend="onTouchend"
+    @click="onPcClick"
     @contextmenu.prevent="onRightClick"
   >
     {{ label }}
