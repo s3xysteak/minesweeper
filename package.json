@@ -14,8 +14,8 @@
   "devDependencies": {
     "@iconify-json/material-symbols": "^1.1.61",
     "@vitejs/plugin-vue": "^4.4.0",
-    "unocss": "^0.57.1",
+    "unocss": "^0.57.2",
     "unplugin-auto-import": "^0.16.7",
-    "vite": "^4.4.11"
+    "vite": "^4.5.0"
   }
 }
