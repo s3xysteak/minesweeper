@@ -13,7 +13,7 @@ function onReset() {
 </script>
 
 <template>
-  <div all="c-gray-7 font-sans" pt-3xl flex flex-col items-center gap-y-2xl>
+  <div all="c-gray-7 font-mono" pt-3xl flex flex-col items-center gap-y-2xl>
     <div font-size-8>minesweeper</div>
     <div
       w-full
