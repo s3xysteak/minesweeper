@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import type { MineSweeperOptions } from './mine'
 import { watch } from 'vue'
 
-const props = defineProps({
-  options: {
-    type: Object,
-    required: true,
-  },
-})
+const { options } = defineProps<{
+  options: MineSweeperOptions
+}>()
 const emit = defineEmits([
   'stepOnBomb',
   'turnSafeCard',
@@ -50,18 +48,6 @@ function onPcClick() {
 }
 
 const bombImg = useTemplateRef('bombImg')
-const blockStyle = [
-  'b-1',
-  'b-solid',
-  'b-gray',
-  'w-8',
-  'h-8',
-  'rounded',
-  'flex',
-  'justify-center',
-  'items-center',
-  'font-size-5',
-]
 
 const label = computed(() => {
   if (!block.value.isTurned)
@@ -107,8 +93,7 @@ function generateMinesAround(row: string | number, col: string | number): number
   let count = 0
   const shouldTurn: { x: number, y: number }[] = []
 
-  const height = props.options.HEIGHT
-  const width = props.options.WIDTH
+  const { height, width } = options
 
   offset.forEach((i) => {
     const neighborX = x + i.x
@@ -175,13 +160,9 @@ watch(
 
 <template>
   <div
-    :class="[
-      blockStyle,
-      block.isTurned
-        ? 'bg-gray-1'
-        : 'bg-gray-3 hover:bg-gray-2 cursor-pointer active:bg-gray-4',
-    ]"
-    transition-100
+    :class="block.isTurned ? 'bg-gray-1' : 'bg-gray-3 hover:bg-gray-2 cursor-pointer active:bg-gray-4'"
+    b="1 solid gray" flex="~ justify-center items-center"
+    h-8 w-8 rounded font-size-5 transition-100
     @touchstart="onTouchstart"
     @touchend="onTouchend"
     @click="onPcClick"

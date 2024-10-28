@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import type { MineSweeperOptions } from '~/components/mine'
+
 const mineSweeper = useTemplateRef('mineSweeper')
-const options = reactive({
-  WIDTH: 10,
-  HEIGHT: 10,
-  BOMB_PROB: 0.15,
+const options = reactive<MineSweeperOptions>({
+  width: 10,
+  height: 10,
+  bombProb: 0.15,
 })
 function onReset() {
   mineSweeper.value?.init()
@@ -19,7 +21,7 @@ function onReset() {
       <div>
         x length:
         <input
-          v-model="options.WIDTH"
+          v-model="options.width"
           placeholder="input x length..."
           w-xm h-6
           type="number"
@@ -28,7 +30,7 @@ function onReset() {
       <div>
         y length:
         <input
-          v-model="options.HEIGHT"
+          v-model="options.height"
           placeholder="input y length..."
           w-xm h-6
           type="number"
@@ -37,7 +39,7 @@ function onReset() {
       <div>
         bomb probability:
         <input
-          v-model="options.BOMB_PROB"
+          v-model="options.bombProb"
           placeholder="input bomb probability..."
           max="1"
           min="0"
@@ -51,7 +53,7 @@ function onReset() {
       reset
     </button>
     <div flex="~ col gap-y-1" mb-6xl select-none @contextmenu.prevent>
-      <MineSweeper ref="mineSweeper" :options="options" />
+      <MineSweeper ref="mineSweeper" :options />
     </div>
   </div>
 </template>
