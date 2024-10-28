@@ -1,20 +1,20 @@
-<script setup>
-import MineSweeper from '@/views/mine-sweeper.vue'
-
-const mineSweeper = ref(null)
+<script setup lang="ts">
+const mineSweeper = useTemplateRef('mineSweeper')
 const options = reactive({
   WIDTH: 10,
   HEIGHT: 10,
-  BOMB_PROB: 0.15
+  BOMB_PROB: 0.15,
 })
 function onReset() {
-  mineSweeper.value.init()
+  mineSweeper.value?.init()
 }
 </script>
 
 <template>
   <div all="c-gray-7 font-mono" pt-3xl flex flex-col items-center gap-y-2xl>
-    <div font-size-8>minesweeper</div>
+    <div font-size-8>
+      minesweeper
+    </div>
     <div
       w-full
       flex-wrap
@@ -32,7 +32,7 @@ function onReset() {
           h-6
           w-xm
           type="number"
-        />
+        >
       </div>
       <div>
         y length:
@@ -42,7 +42,7 @@ function onReset() {
           h-6
           w-xm
           type="number"
-        />
+        >
       </div>
       <div>
         bomb probability:
@@ -55,14 +55,14 @@ function onReset() {
           type="number"
           h-6
           w-xm
-        />
+        >
       </div>
     </div>
-    <button @click="onReset" btn font-size-4 h-8 w-20 transition-100>
+    <button btn font-size-4 h-8 w-20 transition-100 @click="onReset">
       reset
     </button>
-    <div @contextmenu.prevent select-none flex flex-col gap-y-1 mb-6xl>
-      <mine-sweeper :options="options" ref="mineSweeper"></mine-sweeper>
+    <div select-none flex="~ col gap-y-1" mb-6xl @contextmenu.prevent>
+      <MineSweeper ref="mineSweeper" :options="options" />
     </div>
   </div>
 </template>

@@ -1,25 +1,75 @@
-English | [中文](doc/readme-zh_cn.md)
+# Nuxt Minimal Starter
 
-## Preview online
+Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-You can [click here](https://s3xysteak.github.io/minesweeper/) to preview this project!
+## Setup
 
-## Install & Run
+Make sure to install dependencies:
 
-```sh
-// If you haven't installed pnpm yet
-npm install -g pnpm
+```bash
+# npm
+npm install
 
-pnpm i
-pnpm dev
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
 ```
 
-Then access [port 5173](http://localhost:5173) to see the result.
+## Development Server
 
-## Victory conditions
+Start the development server on `http://localhost:3000`:
 
-Flip over all safe cards and flag all bomb cards
+```bash
+# npm
+npm run dev
 
-## Failure conditions
+# pnpm
+pnpm dev
 
-Open any bomb card
+# yarn
+yarn dev
+
+# bun
+bun run dev
+```
+
+## Production
+
+Build the application for production:
+
+```bash
+# npm
+npm run build
+
+# pnpm
+pnpm build
+
+# yarn
+yarn build
+
+# bun
+bun run build
+```
+
+Locally preview production build:
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
