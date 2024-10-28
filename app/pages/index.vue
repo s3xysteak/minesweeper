@@ -11,26 +11,17 @@ function onReset() {
 </script>
 
 <template>
-  <div all="c-gray-7 font-mono" pt-3xl flex flex-col items-center gap-y-2xl>
+  <div all="c-gray-7 font-mono" flex flex-col items-center gap-y-2xl pt-3xl>
     <div font-size-8>
       minesweeper
     </div>
-    <div
-      w-full
-      flex-wrap
-      flex
-      items-center
-      justify-center
-      gap-x-4
-      gap-y-4
-    >
+    <div w-full flex flex-wrap items-center justify-center gap-x-4 gap-y-4>
       <div>
         x length:
         <input
           v-model="options.WIDTH"
           placeholder="input x length..."
-          h-6
-          w-xm
+          w-xm h-6
           type="number"
         >
       </div>
@@ -39,8 +30,7 @@ function onReset() {
         <input
           v-model="options.HEIGHT"
           placeholder="input y length..."
-          h-6
-          w-xm
+          w-xm h-6
           type="number"
         >
       </div>
@@ -53,15 +43,14 @@ function onReset() {
           min="0"
           step="0.05"
           type="number"
-          h-6
-          w-xm
+          w-xm h-6
         >
       </div>
     </div>
-    <button btn font-size-4 h-8 w-20 transition-100 @click="onReset">
+    <button h-8 w-20 font-size-4 transition-100 btn @click="onReset">
       reset
     </button>
-    <div select-none flex="~ col gap-y-1" mb-6xl @contextmenu.prevent>
+    <div flex="~ col gap-y-1" mb-6xl select-none @contextmenu.prevent>
       <MineSweeper ref="mineSweeper" :options="options" />
     </div>
   </div>

@@ -21,6 +21,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.8.0",
     "@iconify-json/material-symbols": "^1.2.5",
+    "@unocss/eslint-plugin": "^0.63.6",
     "@unocss/nuxt": "^0.63.6",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^11.1.0",
