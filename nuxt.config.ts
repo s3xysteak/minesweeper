@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   },
   css: [
     '@unocss/reset/tailwind-compat.css',
+    './app/assets/main.css',
   ],
   compatibilityDate: '2024-10-28',
   devtools: { enabled: true },

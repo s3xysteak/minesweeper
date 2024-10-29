@@ -172,11 +172,11 @@ watch(
     <div
       v-show="block.isTurned && block.isMine"
       ref="bombImg"
-      class="i-material-symbols-bomb"
+      class="i-mdi-bomb"
     />
     <div
       v-show="block.isFlag && !block.isTurned"
-      class="i-material-symbols-flag-outline"
+      class="i-mdi-flag-outline"
     />
   </div>
 </template>
