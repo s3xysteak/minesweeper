@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MineSweeperOptions } from './mine'
+import type { MineSweeperOptions } from './types'
 
 const { options } = defineProps<{
   options: MineSweeperOptions

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MineSweeperOptions } from '~/components/mine'
+import type { MineSweeperOptions } from '~/components/types'
 
 const mineSweeper = useTemplateRef('mineSweeper')
 const options = reactive<MineSweeperOptions>({
