@@ -13,7 +13,7 @@ function onReset() {
 </script>
 
 <template>
-  <div all="c-gray-7 font-mono" flex flex-col items-center gap-y-2xl pt-3xl>
+  <div flex="~ col items-center gap-y-2xl" pt-3xl c-gray-7 font-mono>
     <div font-size-8>
       minesweeper
     </div>
@@ -23,7 +23,7 @@ function onReset() {
         <input
           v-model="options.width"
           placeholder="input x length..."
-          w-xm h-6
+          input
           type="number"
         >
       </div>
@@ -32,7 +32,7 @@ function onReset() {
         <input
           v-model="options.height"
           placeholder="input y length..."
-          w-xm h-6
+          input
           type="number"
         >
       </div>
@@ -41,15 +41,12 @@ function onReset() {
         <input
           v-model="options.bombProb"
           placeholder="input bomb probability..."
-          max="1"
-          min="0"
-          step="0.05"
-          type="number"
-          w-xm h-6
+          max="1" min="0" step="0.05" type="number"
+          input
         >
       </div>
     </div>
-    <button h-8 w-20 font-size-4 transition-100 btn @click="onReset">
+    <button btn @click="onReset">
       reset
     </button>
     <div flex="~ col gap-y-1" mb-6xl select-none @contextmenu.prevent>
