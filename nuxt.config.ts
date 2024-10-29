@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/minesweeper/',
   },
+  css: [
+    '@unocss/reset/tailwind-compat.css',
+    './app/assets/main.css',
+  ],
   compatibilityDate: '2024-10-28',
   devtools: { enabled: true },
   modules: [
