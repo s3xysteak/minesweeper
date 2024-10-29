@@ -1,6 +1,7 @@
 {
   "name": "nuxt-app",
   "type": "module",
+  "version": "0.0.0",
   "private": true,
   "packageManager": "pnpm@8.15.4+sha1.c85a4305534f76d461407b59277b954bac97b5c4",
   "scripts": {
@@ -10,7 +11,8 @@
     "lint:fix": "eslint . --fix",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "release": "bumpp"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.6.0",
@@ -25,6 +27,7 @@
     "@unocss/nuxt": "^0.63.6",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^11.1.0",
+    "bumpp": "^9.8.0",
     "typescript": "^5.6.3",
     "unocss": "^0.63.6"
   }
