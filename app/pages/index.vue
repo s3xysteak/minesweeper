@@ -20,6 +20,17 @@ function onReset() {
 const help = useTemplateRef('help')
 const show = ref(false)
 onClickOutside(help, () => show.value = false)
+
+const scope = effectScope()
+let copy: (text: string) => void
+onMounted(() => {
+  scope.run(() => {
+    const { copy: _ } = useClipboard({
+      legacy: true,
+    })
+    copy = _
+  })
+})
 </script>
 
 <template>
@@ -97,13 +108,9 @@ onClickOutside(help, () => show.value = false)
 
         <input v-model="options.seed" w-40 rounded-none b-x-none input type="number">
 
-        <ClientOnly>
-          <Clipboard v-slot="{ copy }">
-            <button title="copy" aspect-ratio-square rounded-l-none btn-outline @click="copy(options.seed.toString())">
-              <div i-mdi-content-copy />
-            </button>
-          </Clipboard>
-        </ClientOnly>
+        <button title="copy" aspect-ratio-square rounded-l-none btn-outline @click="copy?.(options.seed.toString())">
+          <div i-mdi-content-copy />
+        </button>
       </div>
 
       <button btn @click="onReset">

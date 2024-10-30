@@ -7,9 +7,21 @@ const { options } = defineProps<{
 }>()
 
 const bombCount = ref(0)
+
+const safeCardCount = computed(() => options.width * options.height - bombCount.value)
 const faceupSafeCardCount = ref(0)
+
 const flagBombCardCount = ref(0)
+
 const isEnd = ref(false)
+const isWin = computed(() =>
+  faceupSafeCardCount.value === safeCardCount.value
+  && flagBombCardCount.value === bombCount.value)
+watchEffect(() => {
+  if (isWin.value) {
+    isEnd.value = true
+  }
+})
 
 const offset = [
   { x: -1, y: -1 },
@@ -78,21 +90,9 @@ function init() {
 }
 
 init()
+watch(() => options, () => init(), { deep: true })
 defineExpose({ init })
 
-const safeCardCount = computed(() => options.width * options.height - bombCount.value)
-watchEffect(() => {
-  if (
-    faceupSafeCardCount.value === safeCardCount.value
-    && flagBombCardCount.value === bombCount.value
-  ) {
-    setTimeout(() => {
-      /* eslint-disable no-alert */
-      alert('you win! 🎉')
-      isEnd.value = true
-    }, 500)
-  }
-})
 watch(isEnd, (end) => {
   if (end) {
     state.value?.forEach((rows) => {
@@ -100,6 +100,16 @@ watch(isEnd, (end) => {
         block.faceup = true
       })
     })
+
+    if (isWin.value) {
+      congrats()
+    }
+    else {
+      setTimeout(() => {
+        /* eslint-disable-next-line no-alert */
+        alert('You lose! 😭')
+      }, 500)
+    }
   }
 })
 
