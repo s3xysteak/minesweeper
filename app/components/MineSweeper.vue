@@ -5,7 +5,11 @@ import rand from 'twistrand'
 const { options } = defineProps<{
   options: MineSweeperOptions
 }>()
-
+const emit = defineEmits<{
+  start: []
+  end: []
+  reset: []
+}>()
 const bombCount = ref(0)
 
 const safeCardCount = computed(() => options.width * options.height - bombCount.value)
@@ -87,6 +91,8 @@ function init() {
       block.bombsAround = count
     })
   })
+
+  emit('reset')
 }
 
 init()
@@ -101,6 +107,7 @@ watch(isEnd, (end) => {
       })
     })
 
+    emit('end')
     if (isWin.value) {
       congrats()
     }
@@ -117,6 +124,8 @@ function tryFaceup(item: MineBlockType & { row: number, col: number }) {
   if (item.faceup)
     return
   item.faceup = true
+  emit('start')
+
   if (item.type === 'normal')
     faceupSafeCardCount.value++
 

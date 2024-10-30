@@ -13,10 +13,6 @@ const options = reactive<MineSweeperOptions>({
   seed: roll(),
 })
 
-function onReset() {
-  mineSweeper.value?.init()
-}
-
 const help = useTemplateRef('help')
 const show = ref(false)
 onClickOutside(help, () => show.value = false)
@@ -31,6 +27,13 @@ onMounted(() => {
     copy = _
   })
 })
+
+const { time, start, pause, reset } = useTimer()
+const formatted = useTimeFormatter(time)
+
+function onReset() {
+  mineSweeper.value?.init()
+}
 </script>
 
 <template>
@@ -100,7 +103,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <div flex="~ gap-x-4">
+    <div flex="~ gap-x-4 items-center">
       <div flex>
         <button rounded-r-none btn @click="options.seed = roll()">
           roll
@@ -116,10 +119,14 @@ onMounted(() => {
       <button btn @click="onReset">
         reset
       </button>
+
+      <p text-lg>
+        {{ formatted }}
+      </p>
     </div>
 
     <div flex="~ col gap-y-1" mb-6xl select-none @contextmenu.prevent>
-      <MineSweeper ref="mineSweeper" :options />
+      <MineSweeper ref="mineSweeper" :options @reset="reset" @start="start" @end="pause" />
     </div>
   </div>
 </template>
