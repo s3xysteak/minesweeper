@@ -2,6 +2,7 @@ export interface MineSweeperOptions {
   width: number
   height: number
   bombProb: number
+  seed: number
 }
 
 export interface MineBlockType {

@@ -1,84 +1,160 @@
 <script setup lang="ts">
-import type { MineSweeperOptions } from './types'
+import type { MineBlockType, MineSweeperOptions } from './types'
+import rand from 'twistrand'
 
 const { options } = defineProps<{
   options: MineSweeperOptions
 }>()
+const emit = defineEmits<{
+  start: []
+  end: []
+  reset: []
+}>()
+const bombCount = ref(0)
 
-let bombCount = 0
-const turnedSafeCardCount = ref(0)
+const safeCardCount = computed(() => options.width * options.height - bombCount.value)
+const faceupSafeCardCount = ref(0)
+
 const flagBombCardCount = ref(0)
 
-const state = ref<{
-  index: string
-  value: {
-    index: string
-    isTurned: boolean
-    isMine: number | false
-    isFlag: boolean
-    minesAround: undefined
-    isEnd: boolean
+const isEnd = ref(false)
+const isWin = computed(() =>
+  faceupSafeCardCount.value === safeCardCount.value
+  && flagBombCardCount.value === bombCount.value)
+watchEffect(() => {
+  if (isWin.value) {
+    isEnd.value = true
   }
-}[][]>()
+})
+
+const offset = [
+  { x: -1, y: -1 },
+  { x: 0, y: -1 },
+  { x: 1, y: -1 },
+  { x: -1, y: 0 },
+  { x: 1, y: 0 },
+  { x: -1, y: 1 },
+  { x: 0, y: 1 },
+  { x: 1, y: 1 },
+]
+
+const state = ref<Array<MineBlockType & { row: number, col: number }>[]>()
 
 function init() {
-  bombCount = 0
-  turnedSafeCardCount.value = 0
+  bombCount.value = 0
+  faceupSafeCardCount.value = 0
   flagBombCardCount.value = 0
+  isEnd.value = false
+
+  const mt = rand(options.seed)
+
   state.value = Array.from({ length: options.height }).map(
     (_, rowIndex) =>
-      Array.from({ length: options.width }).map((_, colIndex) => ({
-        index: `${rowIndex}:${colIndex}`,
-        value: {
-          index: `${rowIndex}:${colIndex}`,
-          isTurned: false,
-          isMine: Math.random() < options.bombProb && ++bombCount,
-          isFlag: false,
-          minesAround: undefined,
-          isEnd: false,
-        },
-      })),
+      Array.from({ length: options.width }).map<MineBlockType & { row: number, col: number }>((_, colIndex) => {
+        const type = mt.random() > options.bombProb ? 'normal' : 'bomb'
+        type === 'bomb' && bombCount.value++
+        return {
+          col: colIndex,
+          row: rowIndex,
+          faceup: false,
+          type,
+          clickable: 'ok',
+          bombsAround: 0,
+        }
+      }),
   )
+
+  state.value.forEach((rows) => {
+    rows.forEach((block) => {
+      const x = Number(block.row)
+      const y = Number(block.col)
+
+      let count = 0
+
+      const { height, width } = options
+
+      offset.forEach((i) => {
+        const neighborX = x + i.x
+        const neighborY = y + i.y
+
+        if (
+          (neighborX >= 0)
+          && (neighborX < height)
+          && (neighborY >= 0)
+          && (neighborY < width)
+          && state.value?.[neighborX]?.[neighborY]?.type === 'bomb'
+        ) {
+          count++
+        }
+      })
+
+      block.bombsAround = count
+    })
+  })
+
+  emit('reset')
 }
 
 init()
+watch(() => options, () => init(), { deep: true })
 defineExpose({ init })
 
-function onEnd() {
-  state.value?.forEach?.((row) => {
-    row.forEach((col) => {
-      col.value.isEnd = true
+watch(isEnd, (end) => {
+  if (end) {
+    state.value?.forEach((rows) => {
+      rows.forEach((block) => {
+        block.faceup = true
+      })
     })
-  })
-}
-function onStepOnBomb() {
-  onEnd()
-}
-watchEffect(() => {
-  if (
-    turnedSafeCardCount.value
-    === options.width * options.height - bombCount
-    && flagBombCardCount.value === bombCount
-  ) {
-    setTimeout(() => {
-      /* eslint-disable no-alert */
-      alert('you win! 🎉')
-      onEnd()
-    }, 500)
+
+    emit('end')
+    if (isWin.value) {
+      congrats()
+    }
+    else {
+      setTimeout(() => {
+        /* eslint-disable-next-line no-alert */
+        alert('You lose! 😭')
+      }, 500)
+    }
   }
 })
+
+function tryFaceup(item: MineBlockType & { row: number, col: number }) {
+  if (item.faceup)
+    return
+  item.faceup = true
+  emit('start')
+
+  if (item.type === 'normal')
+    faceupSafeCardCount.value++
+
+  if (item.bombsAround)
+    return
+
+  offset.forEach(({ x, y }) => {
+    const neighborX = item.row + x
+    const neighborY = item.col + y
+
+    const block = state.value?.[neighborX]?.[neighborY]
+    if (block)
+      tryFaceup(block)
+  })
+}
 </script>
 
 <template>
-  <div v-for="(row, i) in state" :key="i" flex="~ gap-1">
-    <div v-for="item in row" :key="item.index">
+  <div v-for="(row, i) in state" :key="i" :style="isEnd && 'pointer-events: none;'" flex="~ gap-1">
+    <div v-for="item in row" :key="`${item.col}:${item.row}`">
       <MineBlock
-        v-model:block="item.value"
-        v-model:state="state"
-        v-model:flag-bomb-card-count="flagBombCardCount"
-        :options="options"
-        @turn-safe-card="turnedSafeCardCount++"
-        @step-on-bomb="onStepOnBomb"
+        v-model:clickable="item.clickable"
+        v-model:faceup="item.faceup"
+        :bombs-around="item.bombsAround"
+        :type="item.type"
+        :bomb-animation="!isEnd"
+        @flag-bombs="(num) => flagBombCardCount += num"
+        @faceup="tryFaceup(item)"
+        @end="isEnd = true"
       />
     </div>
   </div>

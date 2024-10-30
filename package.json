@@ -16,13 +16,16 @@
   },
   "dependencies": {
     "@nuxt/eslint": "^0.6.0",
+    "canvas-confetti": "^1.9.3",
     "nuxt": "^3.13.2",
+    "twistrand": "^0.0.1",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.8.0",
     "@iconify-json/mdi": "^1.2.1",
+    "@types/canvas-confetti": "^1.6.4",
     "@unocss/eslint-plugin": "^0.63.6",
     "@unocss/nuxt": "^0.63.6",
     "@vueuse/core": "^11.1.0",
