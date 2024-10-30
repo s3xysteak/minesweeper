@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { MineBlockType, MineSweeperOptions } from './types'
+import rand from 'twistrand'
 
 const { options } = defineProps<{
   options: MineSweeperOptions
@@ -29,10 +30,12 @@ function init() {
   flagBombCardCount.value = 0
   isEnd.value = false
 
+  const mt = rand(options.seed)
+
   state.value = Array.from({ length: options.height }).map(
     (_, rowIndex) =>
       Array.from({ length: options.width }).map<MineBlockType & { row: number, col: number }>((_, colIndex) => {
-        const type = Math.random() > options.bombProb ? 'normal' : 'bomb'
+        const type = mt.random() > options.bombProb ? 'normal' : 'bomb'
         type === 'bomb' && bombCount.value++
         return {
           col: colIndex,

@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import type { MineSweeperOptions } from '~/components/types'
 
+function roll() {
+  return Math.floor(Math.random() * 0xFFFFFFFF)
+}
+
 const mineSweeper = useTemplateRef('mineSweeper')
 const options = reactive<MineSweeperOptions>({
   width: 10,
   height: 10,
   bombProb: 0.15,
+  seed: roll(),
 })
+
 function onReset() {
   mineSweeper.value?.init()
 }
@@ -83,9 +89,27 @@ onClickOutside(help, () => show.value = false)
       </div>
     </div>
 
-    <button btn @click="onReset">
-      reset
-    </button>
+    <div flex="~ gap-x-4">
+      <div flex>
+        <button rounded-r-none btn @click="options.seed = roll()">
+          roll
+        </button>
+
+        <input v-model="options.seed" w-40 rounded-none b-x-none input type="number">
+
+        <ClientOnly>
+          <Clipboard v-slot="{ copy }">
+            <button title="copy" aspect-ratio-square rounded-l-none btn-outline @click="copy(options.seed.toString())">
+              <div i-mdi-content-copy />
+            </button>
+          </Clipboard>
+        </ClientOnly>
+      </div>
+
+      <button btn @click="onReset">
+        reset
+      </button>
+    </div>
 
     <div flex="~ col gap-y-1" mb-6xl select-none @contextmenu.prevent>
       <MineSweeper ref="mineSweeper" :options />

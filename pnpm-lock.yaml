@@ -14,6 +14,9 @@ importers:
       nuxt:
         specifier: ^3.13.2
         version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.8.1)(eslint@9.13.0(jiti@2.3.3))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.24.2)(terser@5.36.0)(typescript@5.6.3)(vite@5.4.10(@types/node@22.8.1)(terser@5.36.0))(webpack-sources@3.2.3)
+      twistrand:
+        specifier: ^0.0.1
+        version: 0.0.1
       vue:
         specifier: latest
         version: 3.5.12(typescript@5.6.3)
@@ -4276,6 +4279,9 @@ packages:
     resolution: {integrity: sha512-pOUl6Vo2LUq/bSa8S5q7b91cgNSjctn9ugq/+Mvow99qW6x/UZYwzxy/3NmqoT66eHYfCVvFvACC58UBPFf28g==}
     engines: {node: '>=18.0.0'}
     hasBin: true
+
+  twistrand@0.0.1:
+    resolution: {integrity: sha512-4YY2rsjgB8ltFFANYKMcyeRfiZMxZSnvW9dUY+LuT/d4cLpITsebtOSXjjX2FCb3XjuOMDjrndWuMDL80emo2A==}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -9626,6 +9632,8 @@ snapshots:
       get-tsconfig: 4.8.1
     optionalDependencies:
       fsevents: 2.3.3
+
+  twistrand@0.0.1: {}
 
   type-check@0.4.0:
     dependencies:
