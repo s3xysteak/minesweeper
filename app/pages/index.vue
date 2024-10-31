@@ -119,11 +119,11 @@ function onReset() {
       <button btn @click="onReset">
         reset
       </button>
-
-      <p text-lg>
-        {{ formatted }}
-      </p>
     </div>
+
+    <p text-lg>
+      {{ formatted }}
+    </p>
 
     <div flex="~ col gap-y-1" mb-6xl select-none @contextmenu.prevent>
       <MineSweeper ref="mineSweeper" :options @reset="reset" @start="start" @end="pause" />
