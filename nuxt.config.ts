@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   app: {
     baseURL: '/minesweeper/',
+    head: {
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: 'https://api.iconify.design/material-symbols:bomb.svg' }],
+    },
   },
   imports: {
     dirs: [
