@@ -3,10 +3,31 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/minesweeper/',
   },
+  imports: {
+    dirs: [
+      '../shared',
+    ],
+  },
   css: [
     '@unocss/reset/tailwind-compat.css',
     './app/assets/main.css',
   ],
+
+  nitro: {
+    scheduledTasks: {
+      '0 0 * * *': ['insert-daily-run'],
+    },
+    experimental: {
+      tasks: true,
+      database: true,
+    },
+    imports: {
+      dirs: [
+        'shared',
+      ],
+    },
+  },
+
   compatibilityDate: '2024-10-28',
   devtools: { enabled: true },
   modules: [

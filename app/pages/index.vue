@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import type { MineSweeperOptions } from '~/components/types'
 
-function roll() {
-  return Math.floor(Math.random() * 0xFFFFFFFF)
-}
-
 const mineSweeper = useTemplateRef('mineSweeper')
 const options = reactive<MineSweeperOptions>({
   width: 10,
   height: 10,
   bombProb: 0.15,
-  seed: roll(),
+  seed: rollSeed(),
 })
 
 const help = useTemplateRef('help')
@@ -60,14 +56,20 @@ function onReset() {
               /
               <div i-mdi-gesture-tap />
             </div>
-            Left click/Tap to check
+            <div flex="~ items-center">
+              Left click/Tap to check
+              <div i-mdi-chess-pawn text-lg />
+            </div>
 
             <div mt-4 flex>
               <div i-mdi-mouse-right-click-outline />
               /
               <div i-mdi-gesture-tap-hold />
             </div>
-            Right click/Hold to flag
+            <div flex="~ items-center">
+              Right click/Hold to flag
+              <div i-mdi-flag text-lg />
+            </div>
           </section>
         </Transition>
       </div>
@@ -105,7 +107,7 @@ function onReset() {
 
     <div flex="~ gap-x-4 items-center">
       <div flex>
-        <button rounded-r-none btn @click="options.seed = roll()">
+        <button rounded-r-none btn @click="options.seed = rollSeed()">
           roll
         </button>
 
