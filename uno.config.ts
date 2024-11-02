@@ -15,6 +15,8 @@ export default defineConfig({
     ['btn-outline', 'btn [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border-(1 solid #e4e4e7) bg-transparent shadow-sm hover:bg-#f4f4f5 hover:c-#18181b c-#09090B'],
 
     ['input', 'b-(1 solid #e4e4e7) p-(x-3 y-2) rounded-md focus:outline-none focus:ring-(2 #18181b offset-2) disabled:cursor-not-allowed disabled:opacity-50'],
+
+    ['flex-center', 'justify-center items-center'],
   ],
   presets: [
     presetUno(),

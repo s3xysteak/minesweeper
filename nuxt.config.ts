@@ -37,7 +37,15 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@vueuse/nuxt',
     '@unocss/nuxt',
+    '@nuxtjs/i18n',
   ],
+  i18n: {
+    locales: [
+      { code: 'en', name: 'English' },
+      { code: 'zh', name: '简体中文' },
+    ],
+    defaultLocale: 'en',
+  },
   future: {
     compatibilityVersion: 4,
   },

@@ -36,7 +36,7 @@ function onReset() {
   <div flex="~ col items-center gap-y-2xl">
     <div w-full flex flex-wrap items-center justify-center gap-x-4 gap-y-4>
       <div>
-        x length:
+        {{ $t('x-length') }}:
         <input
           v-model="options.width"
           placeholder="input x length..."
@@ -45,7 +45,7 @@ function onReset() {
         >
       </div>
       <div>
-        y length:
+        {{ $t('y-length') }}:
         <input
           v-model="options.height"
           placeholder="input y length..."
@@ -54,7 +54,7 @@ function onReset() {
         >
       </div>
       <div>
-        bomb probability:
+        {{ $t('bomb probability') }}:
         <input
           v-model="options.bombProb"
           placeholder="input bomb probability..."
@@ -67,7 +67,7 @@ function onReset() {
     <div flex="~ gap-x-4 items-center">
       <div flex>
         <button rounded-r-none btn @click="options.seed = rollSeed()">
-          roll
+          {{ $t('roll') }}
         </button>
 
         <input v-model="options.seed" w-40 rounded-none b-x-none input type="number">
@@ -78,7 +78,7 @@ function onReset() {
       </div>
 
       <button btn @click="onReset">
-        reset
+        {{ $t('reset') }}
       </button>
     </div>
 

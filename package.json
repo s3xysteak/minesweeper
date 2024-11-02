@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.2",
   "private": true,
-  "packageManager": "pnpm@8.15.4+sha1.c85a4305534f76d461407b59277b954bac97b5c4",
+  "packageManager": "pnpm@9.12.3",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@nuxt/eslint": "^0.6.0",
+    "@nuxtjs/i18n": "^8.5.5",
     "canvas-confetti": "^1.9.3",
     "nuxt": "^3.13.2",
     "twistrand": "^0.0.1",
