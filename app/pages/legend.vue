@@ -87,8 +87,6 @@ watch(() => options, reset, { deep: true })
       {{ formatted }}
     </p>
 
-    <div flex="~ col gap-y-1" mb-6xl select-none @contextmenu.prevent>
-      <MineSweeper ref="mineSweeper" :options @start="start" @end="pause" />
-    </div>
+    <MineSweeper ref="mineSweeper" :options @start="start" @end="pause" />
   </div>
 </template>

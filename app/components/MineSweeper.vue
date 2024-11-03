@@ -140,18 +140,20 @@ function tryFaceup(item: MineBlockType & { row: number, col: number }) {
 </script>
 
 <template>
-  <div v-for="(row, i) in state" :key="i" :style="isEnd && 'pointer-events: none;'" flex="~ gap-1">
-    <div v-for="item in row" :key="`${item.col}:${item.row}`">
-      <MineBlock
-        v-model:clickable="item.clickable"
-        v-model:faceup="item.faceup"
-        :bombs-around="item.bombsAround"
-        :type="item.type"
-        :bomb-animation="!isEnd"
-        @flag-bombs="(num) => flagBombCardCount += num"
-        @faceup="tryFaceup(item)"
-        @end="isEnd = true"
-      />
+  <div flex="~ col gap-y-1" mb-6xl select-none @contextmenu.prevent>
+    <div v-for="(row, i) in state" :key="i" :style="isEnd && 'pointer-events: none;'" flex="~ gap-1">
+      <div v-for="item in row" :key="`${item.col}:${item.row}`">
+        <MineBlock
+          v-model:clickable="item.clickable"
+          v-model:faceup="item.faceup"
+          :bombs-around="item.bombsAround"
+          :type="item.type"
+          :bomb-animation="!isEnd"
+          @flag-bombs="(num) => flagBombCardCount += num"
+          @faceup="tryFaceup(item)"
+          @end="isEnd = true"
+        />
+      </div>
     </div>
   </div>
 </template>
