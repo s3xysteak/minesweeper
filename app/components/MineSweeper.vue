@@ -8,7 +8,6 @@ const { options } = defineProps<{
 const emit = defineEmits<{
   start: []
   end: []
-  reset: []
 }>()
 const bombCount = ref(0)
 
@@ -91,12 +90,9 @@ function init() {
       block.bombsAround = count
     })
   })
-
-  emit('reset')
 }
 
 init()
-watch(() => options, () => init(), { deep: true })
 defineExpose({ init })
 
 watch(isEnd, (end) => {

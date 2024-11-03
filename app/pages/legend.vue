@@ -20,12 +20,15 @@ onMounted(() => {
   })
 })
 
-const { time, start, pause, reset } = useTimer()
+const { time, start, pause, reset: resetTimer } = useTimer()
 const formatted = useTimeFormatter(time)
 
-function onReset() {
+function reset() {
   mineSweeper.value?.init()
+  resetTimer()
 }
+
+watch(() => options, reset, { deep: true })
 </script>
 
 <template>
@@ -75,7 +78,7 @@ function onReset() {
         </button>
       </div>
 
-      <button btn @click="onReset">
+      <button btn @click="reset">
         {{ $t('reset') }}
       </button>
     </div>
@@ -85,7 +88,7 @@ function onReset() {
     </p>
 
     <div flex="~ col gap-y-1" mb-6xl select-none @contextmenu.prevent>
-      <MineSweeper ref="mineSweeper" :options @reset="reset" @start="start" @end="pause" />
+      <MineSweeper ref="mineSweeper" :options @start="start" @end="pause" />
     </div>
   </div>
 </template>
