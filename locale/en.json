@@ -1,11 +1,12 @@
 {
   "bomb probability": "bomb probability",
   "minesweeper": "minesweeper",
+  "nav.daily-run": "Daily run",
+  "nav.legend": "Legend",
   "reset": "reset",
   "roll": "roll",
   "tip.left-click": "Left click/Tap to check",
   "tip.right-click": "Right click/Hold to flag",
-  "title": "",
   "x-length": "x length",
   "y-length": "y length"
 }

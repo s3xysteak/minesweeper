@@ -3,9 +3,10 @@
   "minesweeper": "扫雷",
   "reset": "重置",
   "roll": "随机",
-  "title": "扫雷",
   "x-length": "宽",
   "y-length": "高",
   "tip.left-click": "左键/点击以翻开",
-  "tip.right-click": "右键/长按以插旗"
+  "tip.right-click": "右键/长按以插旗",
+  "nav.legend": "经典",
+  "nav.daily-run": "每日挑战"
 }

@@ -2,12 +2,26 @@
 const { locales, locale } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const availableLocales = computed(() => locales.value.filter(i => i.code !== locale.value))
+
+const localePath = useLocalePath()
+
+const navOptions = [
+  { label: 'nav.legend', to: '/legend' },
+  { label: 'nav.daily-run', to: '/' },
+]
 </script>
 
 <template>
   <div>
-    <header grid="~ cols-3" p="x-32 y-xl">
-      <div />
+    <header grid="~ cols-3" my-xl px-32>
+      <div flex="~ items-center gap-x-6" h-full>
+        <NuxtLink
+          v-for="{ label, to } in navOptions" :key="to" :to="localePath(to)"
+          h-full flex="~ center" c-gray transition hover:c-gray-6
+        >
+          {{ $t(label) }}
+        </NuxtLink>
+      </div>
 
       <div flex="~ center gap-x-4">
         <h1 font-size-8>
