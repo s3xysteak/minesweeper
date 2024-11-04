@@ -15,8 +15,8 @@
     "release": "bumpp"
   },
   "dependencies": {
-    "@nuxt/eslint": "^0.6.0",
-    "@nuxtjs/i18n": "^8.5.5",
+    "@nuxt/eslint": "^0.6.1",
+    "@nuxtjs/i18n": "^9.0.0",
     "canvas-confetti": "^1.9.3",
     "nuxt": "^3.13.2",
     "twistrand": "^0.0.1",
@@ -29,10 +29,10 @@
     "@types/canvas-confetti": "^1.6.4",
     "@unocss/eslint-plugin": "^0.63.6",
     "@unocss/nuxt": "^0.63.6",
-    "@vueuse/core": "^11.1.0",
-    "@vueuse/nuxt": "^11.1.0",
+    "@vueuse/core": "^11.2.0",
+    "@vueuse/nuxt": "^11.2.0",
     "better-sqlite3": "^11.5.0",
-    "bumpp": "^9.8.0",
+    "bumpp": "^9.8.1",
     "typescript": "^5.6.3",
     "unocss": "^0.63.6"
   }

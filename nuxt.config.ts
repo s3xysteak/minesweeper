@@ -45,6 +45,9 @@ export default defineNuxtConfig({
       { code: 'zh', name: '简体中文' },
     ],
     defaultLocale: 'en',
+    experimental: {
+      typedOptionsAndMessages: 'default',
+    },
   },
   future: {
     compatibilityVersion: 4,
