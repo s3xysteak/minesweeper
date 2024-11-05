@@ -7,7 +7,7 @@ const { options } = defineProps<{
 }>()
 const emit = defineEmits<{
   start: []
-  end: []
+  end: [isWin?: boolean]
 }>()
 const bombCount = ref(0)
 
@@ -92,9 +92,7 @@ function init() {
   })
 }
 
-init()
-defineExpose({ init })
-
+const manuallyEnd = ref(false)
 watch(isEnd, (end) => {
   if (end) {
     state.value?.forEach((rows) => {
@@ -103,7 +101,9 @@ watch(isEnd, (end) => {
       })
     })
 
-    emit('end')
+    emit('end', isWin.value)
+    if (manuallyEnd.value)
+      return
     if (isWin.value) {
       congrats()
     }
@@ -137,6 +137,15 @@ function tryFaceup(item: MineBlockType & { row: number, col: number }) {
       tryFaceup(block)
   })
 }
+
+init()
+defineExpose({
+  init,
+  finish: () => {
+    manuallyEnd.value = true
+    isEnd.value = true
+  },
+})
 </script>
 
 <template>

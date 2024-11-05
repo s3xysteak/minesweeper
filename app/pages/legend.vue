@@ -4,8 +4,8 @@ import type { MineSweeperOptions } from '~/components/types'
 const mineSweeper = useTemplateRef('mineSweeper')
 const options = reactive<MineSweeperOptions>({
   width: 10,
-  height: 10,
-  bombProb: 0.15,
+  height: 15,
+  bombProb: 0.14,
   seed: rollSeed(),
 })
 
@@ -59,7 +59,7 @@ watch(() => options, reset, { deep: true })
         <input
           v-model="options.bombProb"
           placeholder="input bomb probability..."
-          max="1" min="0" step="0.05" type="number"
+          max="1" min="0" step="0.01" type="number"
           input
         >
       </label>

@@ -5,7 +5,7 @@ interface TimeUnits {
   milliseconds: number
 }
 
-export function useTimeFormatter(time: Ref<number>) {
+export function useTimeFormatter(time: MaybeRefOrGetter<number | string>) {
   const parseTime = (ms: number): TimeUnits => {
     const milliseconds = Math.floor(ms % 1000)
     const totalSeconds = Math.floor(ms / 1000)
@@ -22,7 +22,10 @@ export function useTimeFormatter(time: Ref<number>) {
   }
 
   const formatted = computed(() => {
-    const { hours, minutes, seconds, milliseconds } = parseTime(time.value)
+    const _t = toValue(time)
+    if (typeof _t !== 'number' || _t < 0)
+      return _t
+    const { hours, minutes, seconds, milliseconds } = parseTime(_t)
     return `${formatNumber(hours, 2)}:${formatNumber(minutes, 2)}:${formatNumber(seconds, 2)}.${formatNumber(milliseconds, 3)}`
   })
 

@@ -5,8 +5,20 @@
   "roll": "随机",
   "x-length": "宽",
   "y-length": "高",
-  "tip.left-click": "左键/点击以翻开",
-  "tip.right-click": "右键/长按以插旗",
-  "nav.legend": "经典",
-  "nav.daily-run": "每日挑战"
+  "tip": {
+    "left-click": "左键/点击以翻开",
+    "right-click": "右键/长按以插旗"
+  },
+  "nav": {
+    "legend": "经典",
+    "daily-run": "每日挑战"
+  },
+  "daily-run": {
+    "fame-hall": "名人堂",
+    "your-grades": "你的成绩",
+    "leave-your-name": "留下你的大名",
+    "yesterday-challenge": "昨天的挑战"
+  },
+  "date": "日期",
+  "submit": "提交"
 }

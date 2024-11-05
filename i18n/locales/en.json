@@ -1,12 +1,24 @@
 {
   "bomb probability": "bomb probability",
+  "daily-run": {
+    "fame-hall": "Hall of Fame",
+    "leave-your-name": "Leave your name",
+    "yesterday-challenge": "Yesterday challenge",
+    "your-grades": "Your grade"
+  },
+  "date": "Date",
   "minesweeper": "minesweeper",
-  "nav.daily-run": "Daily run",
-  "nav.legend": "Legend",
+  "nav": {
+    "daily-run": "Daily run",
+    "legend": "Legend"
+  },
   "reset": "reset",
   "roll": "roll",
-  "tip.left-click": "Left click/Tap to check",
-  "tip.right-click": "Right click/Hold to flag",
+  "submit": "Submit",
+  "tip": {
+    "left-click": "Left click/Tap to check",
+    "right-click": "Right click/Hold to flag"
+  },
   "x-length": "x length",
   "y-length": "y length"
 }
