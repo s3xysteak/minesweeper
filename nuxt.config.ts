@@ -21,7 +21,6 @@ export default defineNuxtConfig({
     },
     experimental: {
       tasks: true,
-      database: true,
     },
     imports: {
       dirs: [
@@ -30,14 +29,13 @@ export default defineNuxtConfig({
     },
   },
 
+  hub: {
+    database: true,
+  },
+
   compatibilityDate: '2024-10-28',
   devtools: { enabled: true },
-  modules: [
-    '@nuxt/eslint',
-    '@vueuse/nuxt',
-    '@unocss/nuxt',
-    '@nuxtjs/i18n',
-  ],
+  modules: ['@nuxt/eslint', '@vueuse/nuxt', '@unocss/nuxt', '@nuxtjs/i18n', '@nuxthub/core'],
   i18n: {
     locales: [
       { code: 'en', name: 'English' },

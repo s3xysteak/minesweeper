@@ -1,9 +1,11 @@
 export default defineEventHandler(async () => {
-  const db = useDatabase()
+  const db = hubDatabase()
 
-  const value = await db.sql`
-  SELECT id, seed FROM daily_run
-  WHERE DATE(create_time) = CURRENT_DATE;`
+  const value = await db
+    .prepare(`
+      SELECT id, seed FROM daily_run
+      WHERE DATE(create_time) = CURRENT_DATE;`)
+    .all()
 
-  return value.rows?.[0]
+  return value.results?.[0]
 })
