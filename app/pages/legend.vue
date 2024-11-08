@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import type { MineSweeperOptions } from '~/components/types'
 
+const seed = useState(() => rollSeed())
+
 const mineSweeper = useTemplateRef('mineSweeper')
-const options = reactive<MineSweeperOptions>({
+const options = reactive<{ [K in keyof MineSweeperOptions]: MaybeRef<MineSweeperOptions[K]> }>({
   width: 10,
   height: 15,
-  bombProb: 0.14,
-  seed: rollSeed(),
+  bombProb: 0.11,
+  seed,
 })
 
 const scope = effectScope()

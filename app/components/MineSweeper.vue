@@ -26,17 +26,6 @@ watchEffect(() => {
   }
 })
 
-const offset = [
-  { x: -1, y: -1 },
-  { x: 0, y: -1 },
-  { x: 1, y: -1 },
-  { x: -1, y: 0 },
-  { x: 1, y: 0 },
-  { x: -1, y: 1 },
-  { x: 0, y: 1 },
-  { x: 1, y: 1 },
-]
-
 const state = ref<Array<MineBlockType & { row: number, col: number }>[]>()
 
 function init() {
@@ -77,6 +66,16 @@ watch(isEnd, (end) => {
   }
 })
 
+const offset = [
+  { x: -1, y: -1 },
+  { x: 0, y: -1 },
+  { x: 1, y: -1 },
+  { x: -1, y: 0 },
+  { x: 1, y: 0 },
+  { x: -1, y: 1 },
+  { x: 0, y: 1 },
+  { x: 1, y: 1 },
+]
 function tryReveal(item: MineBlockType & { row: number, col: number }) {
   if (item.revealed)
     return

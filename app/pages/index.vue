@@ -6,7 +6,7 @@ const fameHall = useTemplateRef('fame-hall')
 const { data } = await useFetch<{ id: number, seed: string }>('/api/daily-run/today-seed')
 
 const options = reactive<MineSweeperOptions>({
-  bombProb: 0.14,
+  bombProb: 0.11,
   height: 15,
   width: 10,
   seed: computed(() => data.value?.seed) as any as number,
