@@ -71,3 +71,112 @@ exports[`algorithm > shuffle2D 2`] = `
   ],
 ]
 `;
+
+exports[`minesweeper > createMines 1`] = `
+[
+  [
+    {
+      "bombsAround": 0,
+      "clickable": "ok",
+      "col": 0,
+      "revealed": false,
+      "row": 0,
+      "type": "normal",
+    },
+    {
+      "bombsAround": 2,
+      "clickable": "ok",
+      "col": 1,
+      "revealed": false,
+      "row": 0,
+      "type": "normal",
+    },
+    {
+      "bombsAround": 1,
+      "clickable": "ok",
+      "col": 2,
+      "revealed": false,
+      "row": 0,
+      "type": "bomb",
+    },
+  ],
+  [
+    {
+      "bombsAround": 1,
+      "clickable": "ok",
+      "col": 0,
+      "revealed": false,
+      "row": 1,
+      "type": "normal",
+    },
+    {
+      "bombsAround": 3,
+      "clickable": "ok",
+      "col": 1,
+      "revealed": false,
+      "row": 1,
+      "type": "normal",
+    },
+    {
+      "bombsAround": 1,
+      "clickable": "ok",
+      "col": 2,
+      "revealed": false,
+      "row": 1,
+      "type": "bomb",
+    },
+  ],
+  [
+    {
+      "bombsAround": 2,
+      "clickable": "ok",
+      "col": 0,
+      "revealed": false,
+      "row": 2,
+      "type": "bomb",
+    },
+    {
+      "bombsAround": 4,
+      "clickable": "ok",
+      "col": 1,
+      "revealed": false,
+      "row": 2,
+      "type": "normal",
+    },
+    {
+      "bombsAround": 2,
+      "clickable": "ok",
+      "col": 2,
+      "revealed": false,
+      "row": 2,
+      "type": "normal",
+    },
+  ],
+  [
+    {
+      "bombsAround": 2,
+      "clickable": "ok",
+      "col": 0,
+      "revealed": false,
+      "row": 3,
+      "type": "bomb",
+    },
+    {
+      "bombsAround": 2,
+      "clickable": "ok",
+      "col": 1,
+      "revealed": false,
+      "row": 3,
+      "type": "bomb",
+    },
+    {
+      "bombsAround": 1,
+      "clickable": "ok",
+      "col": 2,
+      "revealed": false,
+      "row": 3,
+      "type": "normal",
+    },
+  ],
+]
+`;

@@ -9,16 +9,16 @@ const emit = defineEmits<{
   start: []
   end: [isWin?: boolean]
 }>()
-const bombCount = ref(0)
+const bombCount = computed(() => Math.floor(options.height * options.width * options.bombProb))
 
 const safeCardCount = computed(() => options.width * options.height - bombCount.value)
-const faceupSafeCardCount = ref(0)
+const revealedSafeCardCount = ref(0)
 
 const flagBombCardCount = ref(0)
 
 const isEnd = ref(false)
 const isWin = computed(() =>
-  faceupSafeCardCount.value === safeCardCount.value
+  revealedSafeCardCount.value === safeCardCount.value
   && flagBombCardCount.value === bombCount.value)
 watchEffect(() => {
   if (isWin.value) {
@@ -40,55 +40,16 @@ const offset = [
 const state = ref<Array<MineBlockType & { row: number, col: number }>[]>()
 
 function init() {
-  bombCount.value = 0
-  faceupSafeCardCount.value = 0
+  revealedSafeCardCount.value = 0
   flagBombCardCount.value = 0
   isEnd.value = false
 
   const mt = rand(options.seed)
 
-  state.value = Array.from({ length: options.height }).map(
-    (_, rowIndex) =>
-      Array.from({ length: options.width }).map<MineBlockType & { row: number, col: number }>((_, colIndex) => {
-        const type = mt.random() > options.bombProb ? 'normal' : 'bomb'
-        type === 'bomb' && bombCount.value++
-        return {
-          col: colIndex,
-          row: rowIndex,
-          faceup: false,
-          type,
-          clickable: 'ok',
-          bombsAround: 0,
-        }
-      }),
-  )
-
-  state.value.forEach((rows) => {
-    rows.forEach((block) => {
-      const x = Number(block.row)
-      const y = Number(block.col)
-
-      let count = 0
-
-      const { height, width } = options
-
-      offset.forEach((i) => {
-        const neighborX = x + i.x
-        const neighborY = y + i.y
-
-        if (
-          (neighborX >= 0)
-          && (neighborX < height)
-          && (neighborY >= 0)
-          && (neighborY < width)
-          && state.value?.[neighborX]?.[neighborY]?.type === 'bomb'
-        ) {
-          count++
-        }
-      })
-
-      block.bombsAround = count
-    })
+  state.value = createMines(mt, {
+    height: options.height,
+    width: options.width,
+    mineCount: bombCount.value,
   })
 }
 
@@ -97,7 +58,7 @@ watch(isEnd, (end) => {
   if (end) {
     state.value?.forEach((rows) => {
       rows.forEach((block) => {
-        block.faceup = true
+        block.revealed = true
       })
     })
 
@@ -116,14 +77,14 @@ watch(isEnd, (end) => {
   }
 })
 
-function tryFaceup(item: MineBlockType & { row: number, col: number }) {
-  if (item.faceup)
+function tryReveal(item: MineBlockType & { row: number, col: number }) {
+  if (item.revealed)
     return
-  item.faceup = true
+  item.revealed = true
   emit('start')
 
   if (item.type === 'normal')
-    faceupSafeCardCount.value++
+    revealedSafeCardCount.value++
 
   if (item.bombsAround)
     return
@@ -134,7 +95,7 @@ function tryFaceup(item: MineBlockType & { row: number, col: number }) {
 
     const block = state.value?.[neighborX]?.[neighborY]
     if (block)
-      tryFaceup(block)
+      tryReveal(block)
   })
 }
 
@@ -154,12 +115,12 @@ defineExpose({
       <div v-for="item in row" :key="`${item.col}:${item.row}`">
         <MineBlock
           v-model:clickable="item.clickable"
-          v-model:faceup="item.faceup"
+          v-model:revealed="item.revealed"
           :bombs-around="item.bombsAround"
           :type="item.type"
           :bomb-animation="!isEnd"
           @flag-bombs="(num) => flagBombCardCount += num"
-          @faceup="tryFaceup(item)"
+          @reveal="tryReveal(item)"
           @end="isEnd = true"
         />
       </div>

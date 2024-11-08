@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import type { MineBlockType } from './types'
 
-const { faceup, bombsAround, type, bombAnimation } = defineProps<Pick<MineBlockType, 'type' | 'bombsAround' | 'faceup'> & {
+const { revealed, bombsAround, type, bombAnimation } = defineProps<Pick<MineBlockType, 'type' | 'bombsAround' | 'revealed'> & {
   bombAnimation: boolean
 }>()
 const emit = defineEmits<{
   flagBombs: [number]
-  faceup: []
+  reveal: []
   end: []
 }>()
 const clickable = defineModel<MineBlockType['clickable']>('clickable')
 
-const label = computed(() => !faceup || type === 'bomb' ? '' : (bombsAround || ''))
+const label = computed(() => !revealed || type === 'bomb' ? '' : (bombsAround || ''))
 
 const bombAnimateClass = ref(false)
-watch([() => faceup, () => type], ([faceup, type]) => {
-  if (faceup && type === 'bomb' && bombAnimation) {
+watch([() => revealed, () => type], ([revealed, type]) => {
+  if (revealed && type === 'bomb' && bombAnimation) {
     bombAnimateClass.value = true
     emit('end')
 
@@ -42,7 +42,7 @@ function onPcClick() {
 }
 
 function onRightClick() {
-  if (faceup)
+  if (revealed)
     return
 
   const val = clickable.value === 'flag' ? 'ok' : 'flag'
@@ -53,16 +53,16 @@ function onRightClick() {
   }
 }
 async function onClick() {
-  if (faceup || clickable.value === 'flag')
+  if (revealed || clickable.value === 'flag')
     return
 
-  emit('faceup')
+  emit('reveal')
 }
 </script>
 
 <template>
   <div
-    :class="faceup ? 'bg-gray-1' : 'bg-gray-3 hover:bg-gray-2 cursor-pointer active:bg-gray-4'"
+    :class="revealed ? 'bg-gray-1' : 'bg-gray-3 hover:bg-gray-2 cursor-pointer active:bg-gray-4'"
     b="1 solid gray" flex="~ justify-center items-center"
     h-8 w-8 rounded font-size-5 transition-100
     @touchstart="onTouchstart"
@@ -72,13 +72,13 @@ async function onClick() {
   >
     {{ label }}
     <div
-      v-show="faceup && type === 'bomb'"
+      v-show="revealed && type === 'bomb'"
       :class="{ animate: bombAnimateClass }"
     >
       <div i-mdi-bomb />
     </div>
     <div
-      v-show="clickable === 'flag' && !faceup"
+      v-show="clickable === 'flag' && !revealed"
       i-mdi-flag-outline
     />
   </div>

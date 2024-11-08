@@ -1,6 +1,7 @@
 import rand from 'twistrand'
 import { describe, expect, it } from 'vitest'
 import { shuffle, shuffle2D } from '../utils/algorithm'
+import { createMines } from '../utils/minesweeper'
 
 describe('algorithm', () => {
   const mt = rand(12345)
@@ -27,6 +28,18 @@ describe('algorithm', () => {
         [[1], [2, 3], [4, 5, 6], [7, 8, 9]],
         (min, max) => mt.randomInt(min, max),
       ),
+    ).toMatchSnapshot()
+  })
+})
+
+describe('minesweeper', () => {
+  it('createMines', () => {
+    expect(
+      createMines(rand(12345), {
+        height: 4,
+        width: 3,
+        mineCount: 5,
+      }),
     ).toMatchSnapshot()
   })
 })

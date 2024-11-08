@@ -6,7 +6,7 @@ export interface MineSweeperOptions {
 }
 
 export interface MineBlockType {
-  faceup: boolean
+  revealed: boolean
   clickable: 'ok' | 'flag'
   type: 'normal' | 'bomb'
   bombsAround: number
