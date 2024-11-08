@@ -1,0 +1,73 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`algorithm > shuffle 1`] = `
+[
+  4,
+  7,
+  3,
+  5,
+  0,
+  8,
+  9,
+  2,
+  1,
+  6,
+]
+`;
+
+exports[`algorithm > shuffle2D 1`] = `
+[
+  [
+    5,
+  ],
+  [
+    1,
+  ],
+  [
+    7,
+  ],
+  [
+    4,
+  ],
+  [
+    9,
+  ],
+  [
+    2,
+  ],
+  [
+    0,
+  ],
+  [
+    6,
+  ],
+  [
+    3,
+  ],
+  [
+    8,
+  ],
+]
+`;
+
+exports[`algorithm > shuffle2D 2`] = `
+[
+  [
+    9,
+  ],
+  [
+    3,
+    4,
+  ],
+  [
+    8,
+    6,
+    5,
+  ],
+  [
+    2,
+    1,
+    7,
+  ],
+]
+`;
