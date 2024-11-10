@@ -29,7 +29,7 @@ const rankClass: Record<number, string> = {
 </script>
 
 <template>
-  <div max-h-xl w-lg>
+  <div max-h-xl max-w-90vw lg:w-lg>
     <p>
       {{ $t('daily-run.yesterday-challenge') }}: {{ yesterdaySeed ?? '--' }}
     </p>
@@ -41,7 +41,7 @@ const rankClass: Record<number, string> = {
     <main>
       <div
         v-for="item in data" :key="item.id"
-        p-4 transition hover:bg-gray-2 flex="~ justify-between"
+        flex="~ justify-between" rounded-md p-4 transition hover:bg-gray-2
       >
         <div flex="~ items-center gap-x-2">
           <div
@@ -52,8 +52,11 @@ const rankClass: Record<number, string> = {
             {{ item.rank }}
           </p>
 
-          <p>{{ item.username }}</p>
+          <p max-w-36vw break-words md:max-w-64>
+            {{ item.username }}
+          </p>
         </div>
+
         <p>{{ item.time }}</p>
       </div>
     </main>
