@@ -9,18 +9,38 @@ const navOptions = [
   { label: 'nav.legend', to: '/legend' },
   { label: 'nav.daily-run', to: '/' },
 ]
+
+const [DefineNav, Nav] = createReusableTemplate<{ className?: string }>()
 </script>
 
 <template>
   <div>
-    <header grid="~ cols-3" my-xl px-32>
-      <div flex="~ items-center gap-x-6" h-full>
-        <NuxtLink
-          v-for="{ label, to } in navOptions" :key="to" :to="localePath(to)"
-          h-full flex="~ center" c-gray transition hover:c-gray-6
-        >
-          {{ $t(label) }}
-        </NuxtLink>
+    <DefineNav v-slot="{ className }">
+      <NuxtLink
+        v-for="{ label, to } in navOptions" :key="to" :to="localePath(to)"
+        h-full flex="~ items-center" transition :class="className"
+      >
+        {{ $t(label) }}
+      </NuxtLink>
+    </DefineNav>
+
+    <header flex="~ justify-between items-center" lg:grid="~ cols-3" my-xl px-4 lg:px-32>
+      <div flex="~ items-center" h-full>
+        <div hidden lg:flex="~ items-center gap-x-6" h-full>
+          <Nav class-name="c-gray hover:c-gray-6" />
+        </div>
+
+        <Dropdown>
+          <template #trigger>
+            <button aspect-ratio-square rounded-full p-2 btn-outline lg:hidden>
+              <div i-mdi-dots-horizontal />
+            </button>
+          </template>
+
+          <div flex="~ col gap-y-2" mt-4 rounded-md bg-white p-4 text-nowrap shadow-md>
+            <Nav class-name="px-4 py-2" />
+          </div>
+        </Dropdown>
       </div>
 
       <div flex="~ center gap-x-4">
@@ -62,7 +82,7 @@ const navOptions = [
       <div flex="~ items-center justify-right gap-x-2">
         <Dropdown main-class="right-0">
           <template #trigger>
-            <button aspect-ratio-square rounded-full p-2 btn-outline>
+            <button aspect-ratio-square rounded-full p-2 btn-outline lt-lg:hidden>
               <div i-mdi-google-translate text-lg />
             </button>
           </template>
@@ -79,7 +99,7 @@ const navOptions = [
 
         <a
           href="https://github.com/s3xysteak/minesweeper" target="_blank"
-          aspect-ratio-square rounded-full p-2 btn-outline
+          aspect-ratio-square rounded-full p-2 btn-outline lt-lg:hidden
         >
           <div i-mdi-github text-lg />
         </a>
