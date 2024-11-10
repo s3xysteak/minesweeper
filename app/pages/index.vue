@@ -93,7 +93,7 @@ watch(showFameHall, () => fameHall.value?.refresh())
         <form @submit.prevent="onSubmit">
           <label>
             {{ $t('daily-run.leave-your-name') }}:
-            <input v-model="name" autofocus input>
+            <input v-model="name" maxlength="32" autofocus input>
           </label>
 
           <footer flex="~ justify-right" mt-8>
