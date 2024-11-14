@@ -50,7 +50,10 @@ function onEnd(isWin?: boolean) {
 }
 
 const name = ref('')
+
+const submitPending = ref(false)
 async function onSubmit() {
+  submitPending.value = true
   await $fetch('/api/daily-run/add', {
     method: 'post',
     body: {
@@ -59,6 +62,8 @@ async function onSubmit() {
       time: time.value,
     },
   })
+  submitPending.value = false
+
   showFormDialog.value = false
 }
 
@@ -68,9 +73,9 @@ watch(showFameHall, () => fameHall.value?.refresh())
 
 <template>
   <div w-full flex="~ col items-center">
-    <button btn-outline @click="showFameHall = true">
+    <Button variant="outline" @click="showFameHall = true">
       {{ $t('daily-run.fame-hall') }}
-    </button>
+    </Button>
 
     <p my-8 text-lg>
       {{ formatted }}
@@ -85,9 +90,7 @@ watch(showFameHall, () => fameHall.value?.refresh())
             {{ $t('daily-run.your-grades') }}: {{ formatted }}
           </p>
 
-          <button rounded-full p-2 @click="showFormDialog = false">
-            <div i-mdi-close />
-          </button>
+          <Button round icon="i-mdi-close" @click="showFormDialog = false" />
         </header>
 
         <form @submit.prevent="onSubmit">
@@ -97,9 +100,9 @@ watch(showFameHall, () => fameHall.value?.refresh())
           </label>
 
           <footer flex="~ justify-right" mt-8>
-            <button btn>
+            <Button :loading="submitPending">
               {{ $t('submit') }}
-            </button>
+            </Button>
           </footer>
         </form>
       </div>

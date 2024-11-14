@@ -32,9 +32,7 @@ const [DefineNav, Nav] = createReusableTemplate<{ className?: string }>()
 
         <Dropdown>
           <template #trigger>
-            <button aspect-ratio-square rounded-full p-2 btn-outline lg:hidden>
-              <div i-mdi-dots-horizontal />
-            </button>
+            <Button icon="i-mdi-dots-horizontal" variant="outline" round lg:hidden />
           </template>
 
           <div flex="~ col gap-y-2" mt-4 rounded-md bg-white p-4 text-nowrap shadow-md>
@@ -48,11 +46,9 @@ const [DefineNav, Nav] = createReusableTemplate<{ className?: string }>()
           {{ $t('minesweeper') }}
         </h1>
 
-        <Dropdown>
+        <Dropdown main-class="-left-32">
           <template #trigger>
-            <button aspect-ratio-square h-auto w-auto rounded-full p-2 btn-outline>
-              <div i-mdi-help text-lg />
-            </button>
+            <Button icon="i-mdi-help" variant="outline" round />
           </template>
 
           <section w="[max-content]" mt-4 rounded-md bg-white p-4 shadow>
@@ -75,6 +71,20 @@ const [DefineNav, Nav] = createReusableTemplate<{ className?: string }>()
               {{ $t('tip.right-click') }}
               <div i-mdi-flag text-lg />
             </div>
+
+            <div mt-4 flex>
+              <div i-mdi-trophy bg-yellow text-lg />
+            </div>
+            <div>
+              {{ $t('tip.success') }}
+            </div>
+
+            <div mt-4 flex>
+              <div i-mdi-robot-dead text-lg c-red />
+            </div>
+            <div>
+              {{ $t('tip.fail') }}
+            </div>
           </section>
         </Dropdown>
       </div>
@@ -82,9 +92,7 @@ const [DefineNav, Nav] = createReusableTemplate<{ className?: string }>()
       <div flex="~ items-center justify-right gap-x-2">
         <Dropdown main-class="right-0">
           <template #trigger>
-            <button aspect-ratio-square rounded-full p-2 btn-outline lt-lg:hidden>
-              <div i-mdi-google-translate text-lg />
-            </button>
+            <Button icon="i-mdi-google-translate" variant="outline" round lt-lg:hidden />
           </template>
 
           <section mt-2 rounded-md bg-white p-2 shadow flex="~ col gap-y-2">
@@ -97,11 +105,8 @@ const [DefineNav, Nav] = createReusableTemplate<{ className?: string }>()
           </section>
         </Dropdown>
 
-        <a
-          href="https://github.com/s3xysteak/minesweeper" target="_blank"
-          aspect-ratio-square rounded-full p-2 btn-outline lt-lg:hidden
-        >
-          <div i-mdi-github text-lg />
+        <a href="https://github.com/s3xysteak/minesweeper" target="_blank">
+          <Button round lt-lg:hidden variant="outline" icon="i-mdi-github" />
         </a>
       </div>
     </header>

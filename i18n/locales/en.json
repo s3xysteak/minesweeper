@@ -17,7 +17,9 @@
   "submit": "Submit",
   "tip": {
     "left-click": "Left click/Tap to check",
-    "right-click": "Right click/Hold to flag"
+    "right-click": "Right click/Hold to flag",
+    "success": "Find all safe cells, flag all mines",
+    "fail": "Step on a mine"
   },
   "x-length": "x length",
   "y-length": "y length"

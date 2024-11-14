@@ -10,6 +10,13 @@ export default defineNuxtConfig({
       '../shared',
     ],
   },
+  components: [
+    {
+      path: '~/components/ui',
+      prefix: '',
+    },
+    '~/components',
+  ],
   css: [
     '@unocss/reset/tailwind-compat.css',
     './app/assets/main.css',
