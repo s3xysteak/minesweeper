@@ -46,7 +46,7 @@ const [DefineNav, Nav] = createReusableTemplate<{ className?: string }>()
           {{ $t('minesweeper') }}
         </h1>
 
-        <Dropdown>
+        <Dropdown main-class="-left-24">
           <template #trigger>
             <Button icon="i-mdi-help" variant="outline" round />
           </template>

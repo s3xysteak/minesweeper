@@ -17,6 +17,7 @@ export default defineConfig({
     ['input', 'b-(1 solid #e4e4e7) p-(x-3 y-2) rounded-md focus:outline-none focus:ring-(2 #18181b offset-2) disabled:cursor-not-allowed disabled:opacity-50'],
 
     ['flex-center', 'justify-center items-center'],
+    ['absolute-center', 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'],
   ],
   presets: [
     presetUno(),

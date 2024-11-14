@@ -20,6 +20,7 @@ const variantMap: Record<Variant, string> = {
       icon && Object.keys($slots).length === 0 && 'aspect-ratio-square p-2 text-lg',
       round && 'rounded-full',
     ]"
+    :disabled="loading"
   >
     <!-- loading -->
     <div v-if="loading !== undefined" v-show="loading" i-mdi-loading animate-spin />

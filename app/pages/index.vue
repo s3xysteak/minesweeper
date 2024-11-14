@@ -50,7 +50,10 @@ function onEnd(isWin?: boolean) {
 }
 
 const name = ref('')
+
+const submitPending = ref(false)
 async function onSubmit() {
+  submitPending.value = true
   await $fetch('/api/daily-run/add', {
     method: 'post',
     body: {
@@ -59,6 +62,8 @@ async function onSubmit() {
       time: time.value,
     },
   })
+  submitPending.value = false
+
   showFormDialog.value = false
 }
 
@@ -95,7 +100,7 @@ watch(showFameHall, () => fameHall.value?.refresh())
           </label>
 
           <footer flex="~ justify-right" mt-8>
-            <Button>
+            <Button :loading="submitPending">
               {{ $t('submit') }}
             </Button>
           </footer>
