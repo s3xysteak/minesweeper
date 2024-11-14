@@ -7,7 +7,9 @@
   "y-length": "高",
   "tip": {
     "left-click": "左键/点击以翻开",
-    "right-click": "右键/长按以插旗"
+    "right-click": "右键/长按以插旗",
+    "success": "找到所有安全格子，标记所有地雷",
+    "fail": "踩到地雷"
   },
   "nav": {
     "legend": "经典",

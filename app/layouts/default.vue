@@ -46,7 +46,7 @@ const [DefineNav, Nav] = createReusableTemplate<{ className?: string }>()
           {{ $t('minesweeper') }}
         </h1>
 
-        <Dropdown main-class="-left-24">
+        <Dropdown main-class="-left-32">
           <template #trigger>
             <Button icon="i-mdi-help" variant="outline" round />
           </template>
@@ -70,6 +70,20 @@ const [DefineNav, Nav] = createReusableTemplate<{ className?: string }>()
             <div flex="~ items-center">
               {{ $t('tip.right-click') }}
               <div i-mdi-flag text-lg />
+            </div>
+
+            <div mt-4 flex>
+              <div i-mdi-trophy bg-yellow text-lg />
+            </div>
+            <div>
+              {{ $t('tip.success') }}
+            </div>
+
+            <div mt-4 flex>
+              <div i-mdi-robot-dead text-lg c-red />
+            </div>
+            <div>
+              {{ $t('tip.fail') }}
             </div>
           </section>
         </Dropdown>
