@@ -69,20 +69,18 @@ watch(() => options, reset, { deep: true })
 
     <div flex="~ gap-x-4 items-center">
       <div flex>
-        <button rounded-r-none btn @click="options.seed = rollSeed()">
+        <Button rounded-r-none @click="options.seed = rollSeed()">
           {{ $t('roll') }}
-        </button>
+        </Button>
 
         <input v-model="options.seed" w-40 rounded-none b-x-none input type="number">
 
-        <button title="copy" aspect-ratio-square rounded-l-none btn-outline @click="copy?.(options.seed.toString())">
-          <div i-mdi-content-copy />
-        </button>
+        <Button title="copy" variant="outline" rounded-l-none icon="i-mdi-content-copy" @click="copy?.(options.seed.toString())" />
       </div>
 
-      <button btn @click="reset">
+      <Button @click="reset">
         {{ $t('reset') }}
-      </button>
+      </Button>
     </div>
 
     <p text-lg>
