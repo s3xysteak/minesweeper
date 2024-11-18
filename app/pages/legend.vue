@@ -31,6 +31,14 @@ function reset() {
 }
 
 watch(() => options, reset, { deep: true })
+
+const tip = useTemplateRef('tip')
+function onCopy() {
+  if (copy && tip.value) {
+    copy(options.seed.toString())
+    tip.value.show()
+  }
+}
 </script>
 
 <template>
@@ -75,7 +83,7 @@ watch(() => options, reset, { deep: true })
 
         <input v-model="options.seed" w-40 rounded-none b-x-none input type="number">
 
-        <Button title="copy" variant="outline" rounded-l-none icon="i-mdi-content-copy" @click="copy?.(options.seed.toString())" />
+        <Button title="copy" variant="outline" rounded-l-none icon="i-mdi-content-copy" @click="onCopy" />
       </div>
 
       <Button @click="reset">
@@ -88,5 +96,9 @@ watch(() => options, reset, { deep: true })
     </p>
 
     <MineSweeper ref="mineSweeper" :options @start="start" @end="pause" />
+
+    <TinyTip ref="tip">
+      ✨ {{ $t('copied') }}
+    </TinyTip>
   </div>
 </template>

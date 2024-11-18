@@ -1,5 +1,6 @@
 {
   "bomb probability": "bomb probability",
+  "copied": "Copied",
   "daily-run": {
     "fame-hall": "Hall of Fame",
     "leave-your-name": "Leave your name",
@@ -7,6 +8,7 @@
     "your-grades": "Your grade"
   },
   "date": "Date",
+  "lose": "Your lose!",
   "minesweeper": "minesweeper",
   "nav": {
     "daily-run": "Daily run",
@@ -16,10 +18,10 @@
   "roll": "roll",
   "submit": "Submit",
   "tip": {
+    "fail": "Step on a mine",
     "left-click": "Left click/Tap to check",
     "right-click": "Right click/Hold to flag",
-    "success": "Find all safe cells, flag all mines",
-    "fail": "Step on a mine"
+    "success": "Find all safe cells, flag all mines"
   },
   "x-length": "x length",
   "y-length": "y length"
