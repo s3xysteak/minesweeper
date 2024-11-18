@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import type { MineSweeperOptions } from '~/components/types'
 
+useSeoMeta({
+  title: 'Minesweeper - daily challenge',
+  ogTitle: 'Minesweeper - daily challenge',
+  description: 'Compete with others online to play minesweeper!',
+  ogDescription: 'Compete with others online to play minesweeper!',
+})
+
 const fameHall = useTemplateRef('fame-hall')
 
 const { data } = await useFetch<{ id: number, seed: string }>('/api/daily-run/today-seed')
