@@ -11,6 +11,8 @@ const emit = defineEmits<{
 }>()
 const bombCount = computed(() => Math.floor(options.height * options.width * options.bombProb))
 
+const { t } = useI18n()
+
 const safeCardCount = computed(() => options.width * options.height - bombCount.value)
 const revealedSafeCardCount = ref(0)
 
@@ -60,7 +62,7 @@ watch(isEnd, (end) => {
     else {
       setTimeout(() => {
         /* eslint-disable-next-line no-alert */
-        alert('You lose! 😭')
+        alert(`${t('lose')} 😭`)
       }, 500)
     }
   }

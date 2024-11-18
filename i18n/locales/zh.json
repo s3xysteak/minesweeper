@@ -22,5 +22,7 @@
     "yesterday-challenge": "昨天的挑战"
   },
   "date": "日期",
-  "submit": "提交"
+  "submit": "提交",
+  "lose": "你输了！",
+  "copied": "已复制"
 }
