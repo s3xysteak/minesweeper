@@ -10,7 +10,8 @@ useSeoMeta({
 
 const fameHall = useTemplateRef('fame-hall')
 
-const { data } = await useFetch<{ id: number, seed: string }>('/api/daily-run/today-seed')
+const { data, status } = useFetch<{ id: number, seed: string }>('/api/daily-run/today-seed')
+const pending = computed(() => status.value === 'pending')
 
 const options = reactive<MineSweeperOptions>({
   bombProb: 0.11,
@@ -88,7 +89,10 @@ watch(showFameHall, () => fameHall.value?.refresh())
       {{ formatted }}
     </p>
 
-    <MineSweeper ref="mineSweeper" :options @start="start" @end="onEnd" />
+    <div v-show="pending" w-sm flex="~ col gap-y-2">
+      <Skeleton v-for="_, index in Array.from({ length: 8 })" :key="index" h-8 />
+    </div>
+    <MineSweeper v-show="!pending" ref="mineSweeper" :options @start="start" @end="onEnd" />
 
     <Dialog v-model="showFormDialog" disable-outside-pointer-events>
       <div p-4>
