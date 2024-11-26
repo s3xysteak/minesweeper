@@ -10,7 +10,7 @@ useSeoMeta({
 
 const fameHall = useTemplateRef('fame-hall')
 
-const { data, status } = useFetch<{ id: number, seed: string }>('/api/daily-run/today-seed')
+const { data, status, execute: refreshSeed } = useFetch<{ id: number, seed: string }>('/api/daily-run/today-seed')
 const pending = computed(() => status.value === 'pending')
 
 const options = reactive<MineSweeperOptions>({
@@ -22,8 +22,9 @@ const options = reactive<MineSweeperOptions>({
 
 const mineSweeper = useTemplateRef('mineSweeper')
 
-const { data: now } = useFetch<number>('/api/now')
+const { data: now, execute: refreshNow } = useFetch<number>('/api/now')
 const nowFormatted = useDateFormat(now, 'YYYY-MM-DD')
+
 const [dailyRunData, addDailyRunData] = useDailyRunToday(nowFormatted)
 watchEffect(() => {
   if (dailyRunData())
@@ -77,13 +78,24 @@ async function onSubmit() {
 
 const showFameHall = ref(false)
 watch(showFameHall, () => fameHall.value?.refresh())
+
+function onRestart() {
+  refreshNow()
+  refreshSeed()
+}
 </script>
 
 <template>
   <div w-full flex="~ col items-center">
-    <Button variant="outline" @click="showFameHall = true">
-      {{ $t('daily-run.fame-hall') }}
-    </Button>
+    <div flex="~ gap-x-2 items-center">
+      <Button variant="outline" @click="showFameHall = true">
+        {{ $t('daily-run.fame-hall') }}
+      </Button>
+      <div flex="~ col items-center">
+        {{ $t('daily-run.new-run-in') }}
+        <TimeUntilNextDay @restart="onRestart" />
+      </div>
+    </div>
 
     <p my-8 text-lg>
       {{ formatted }}

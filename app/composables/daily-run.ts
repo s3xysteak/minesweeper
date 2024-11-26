@@ -4,13 +4,13 @@ interface DailyRunData {
 }
 
 export function useDailyRunData() {
-  const KEY = 'daily-run'
+  const data = useLocalStorage('daily-run', '[]')
 
-  const getter = () => JSON.parse(localStorage.getItem(KEY) ?? '[]') as DailyRunData[]
+  const getter = () => JSON.parse(data.value) as DailyRunData[]
   const setter = (val: DailyRunData) => {
     const raw = getter()
     raw.push(val)
-    localStorage.setItem(KEY, JSON.stringify(raw))
+    data.value = JSON.stringify(raw)
   }
   return [
     getter,
