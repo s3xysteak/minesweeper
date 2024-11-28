@@ -5,11 +5,6 @@ export default defineNuxtConfig({
       link: [{ rel: 'icon', type: 'image/svg+xml', href: 'https://api.iconify.design/material-symbols:bomb.svg' }],
     },
   },
-  imports: {
-    dirs: [
-      '../shared',
-    ],
-  },
   components: [
     {
       path: '~/components/ui',
@@ -28,11 +23,6 @@ export default defineNuxtConfig({
     },
     experimental: {
       tasks: true,
-    },
-    imports: {
-      dirs: [
-        'shared',
-      ],
     },
   },
 
